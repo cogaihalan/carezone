@@ -33,31 +33,70 @@ export default function AudioPlayer({
     const handleEnded = () => {
       if (loop) {
         audio.currentTime = 0;
-        audio.play();
+        audio.play().catch(console.error);
       } else {
         setIsPlaying(false);
       }
     };
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleLoadStart = () => {
+      setCurrentTime(0);
+    };
 
     audio.addEventListener("timeupdate", updateTime);
     audio.addEventListener("ended", handleEnded);
+    audio.addEventListener("play", handlePlay);
+    audio.addEventListener("pause", handlePause);
+    audio.addEventListener("loadstart", handleLoadStart);
 
     return () => {
       audio.removeEventListener("timeupdate", updateTime);
       audio.removeEventListener("ended", handleEnded);
+      audio.removeEventListener("play", handlePlay);
+      audio.removeEventListener("pause", handlePause);
+      audio.removeEventListener("loadstart", handleLoadStart);
     };
   }, [loop]);
 
-  const togglePlay = () => {
+  // Ensure audio is loaded and ready
+  useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
+    const handleCanPlay = () => {
+      console.log("Audio can play");
+    };
+
+    const handleError = (e: Event) => {
+      console.error("Audio error:", e);
+    };
+
+    audio.addEventListener("canplay", handleCanPlay);
+    audio.addEventListener("error", handleError);
+
+    return () => {
+      audio.removeEventListener("canplay", handleCanPlay);
+      audio.removeEventListener("error", handleError);
+    };
+  }, [src]);
+
+  const togglePlay = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    try {
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else {
+        await audio.play();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error("Error playing audio:", error);
+      setIsPlaying(false);
     }
-    setIsPlaying(!isPlaying);
   };
 
   const toggleMute = () => {

@@ -53,7 +53,7 @@ export default function StoriesPage() {
           className="mb-12"
         >
           <AudioPlayer
-            src="/audio/lofi-music.mp3"
+            src="/audio/lo-fi-alarm-clock.mp3"
             frequency={432}
             duration={240}
             loop={true}
@@ -69,57 +69,110 @@ export default function StoriesPage() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="max-w-2xl mx-auto"
         >
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20">
-            <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center">
-              Viết tâm sự của bạn
-            </h3>
+          <div className="relative">
+            {/* Balloon Container */}
+            <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-primary-blue/20 overflow-hidden">
+              {/* Balloon Shape Background */}
+              <div className="absolute inset-0 bg-gradient-to-b from-pink-100 to-blue-100 rounded-3xl opacity-50"></div>
+              
+              <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center relative z-10">
+                Viết tâm sự vào bong bóng
+              </h3>
 
-            <div className="relative">
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Hãy viết ra những áp lực, lo lắng hay bất kỳ điều gì bạn muốn chia sẻ..."
-                className="w-full h-48 p-4 border-2 border-primary-blue/30 rounded-xl resize-none focus:outline-none focus:border-primary-blue font-body text-foreground placeholder-foreground/50 bg-white/50"
-                disabled={isSubmitted}
-              />
+              <div className="relative z-10">
+                <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Hãy viết ra những tâm sự, lo lắng hay bất kỳ điều gì bạn muốn chia sẻ với trời mây..."
+                  className="w-full h-48 p-4 border-2 border-primary-blue/30 rounded-xl resize-none focus:outline-none focus:border-primary-blue font-body text-foreground placeholder-foreground/50 bg-white/70 backdrop-blur-sm"
+                  disabled={isSubmitted}
+                />
 
-              {/* Floating particles */}
-              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
-                {[...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-2 h-2 bg-primary-blue/40 rounded-full"
-                    style={{
-                      left: `${20 + i * 15}%`,
-                      top: `${10 + (i % 3) * 20}%`,
-                    }}
-                    animate={{
-                      y: [0, -20, 0],
-                      opacity: [0.4, 1, 0.4],
-                    }}
-                    transition={{
-                      duration: 3 + i * 0.5,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                  />
-                ))}
+                {/* Floating balloon particles */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-xl">
+                  {[...Array(6)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-3 h-4 bg-gradient-to-b from-pink-200 to-blue-200 rounded-full opacity-60"
+                      style={{
+                        left: `${15 + i * 12}%`,
+                        top: `${5 + (i % 3) * 15}%`,
+                      }}
+                      animate={{
+                        y: [0, -25, 0],
+                        rotate: [0, 5, -5, 0],
+                        opacity: [0.6, 1, 0.6],
+                      }}
+                      transition={{
+                        duration: 4 + i * 0.3,
+                        repeat: Infinity,
+                        delay: i * 0.4,
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
+
+              <motion.button
+                onClick={handleSubmit}
+                disabled={!message.trim() || isSubmitted}
+                className={`w-full mt-6 py-3 px-6 rounded-xl font-heading font-semibold text-lg transition-all duration-300 relative z-10 ${
+                  message.trim() && !isSubmitted
+                    ? "bg-gradient-to-r from-pink-400 to-blue-400 hover:from-pink-500 hover:to-blue-500 text-white transform hover:scale-105 shadow-lg"
+                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                }`}
+                whileHover={message.trim() && !isSubmitted ? { scale: 1.02 } : {}}
+                whileTap={message.trim() && !isSubmitted ? { scale: 0.98 } : {}}
+              >
+                {isSubmitted ? "Bong bóng đang bay..." : "Thả bong bóng lên trời"}
+              </motion.button>
             </div>
 
-            <motion.button
-              onClick={handleSubmit}
-              disabled={!message.trim() || isSubmitted}
-              className={`w-full mt-6 py-3 px-6 rounded-xl font-heading font-semibold text-lg transition-all duration-300 ${
-                message.trim() && !isSubmitted
-                  ? "bg-primary-blue hover:bg-primary-blue/80 text-white transform hover:scale-105"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
-              }`}
-              whileHover={message.trim() && !isSubmitted ? { scale: 1.02 } : {}}
-              whileTap={message.trim() && !isSubmitted ? { scale: 0.98 } : {}}
-            >
-              {isSubmitted ? "Đang gửi..." : "Gửi tâm sự"}
-            </motion.button>
+            {/* Balloon Animation */}
+            <AnimatePresence>
+              {isSubmitted && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8, y: 0 }}
+                  animate={{ 
+                    opacity: [1, 1, 0], 
+                    scale: [1, 1.2, 0.5],
+                    y: [0, -100, -200]
+                  }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ 
+                    duration: 2,
+                    ease: "easeOut"
+                  }}
+                  className="absolute inset-0 pointer-events-none z-20"
+                >
+                  {/* Multiple balloons floating up */}
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-16 h-20 bg-gradient-to-b from-pink-200 to-blue-200 rounded-full opacity-80"
+                      style={{
+                        left: `${30 + i * 20}%`,
+                        top: "50%",
+                      }}
+                      animate={{
+                        y: [0, -150 - i * 50],
+                        x: [0, (i - 1) * 20],
+                        rotate: [0, 360],
+                        scale: [1, 0.8, 0.3],
+                      }}
+                      transition={{
+                        duration: 2,
+                        delay: i * 0.2,
+                        ease: "easeOut"
+                      }}
+                    >
+                      {/* Balloon string */}
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-gray-400"></div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
 

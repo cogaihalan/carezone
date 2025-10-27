@@ -38,7 +38,7 @@ export default function HomePage() {
             {/* Main Relaxation Audio */}
             <div className="md:col-span-2">
               <AudioPlayer
-                src="/audio/relaxation-sounds.mp3"
+                src="/audio/tieng_la_roi.mp3"
                 frequency={528}
                 duration={45}
                 loop={true}
@@ -120,7 +120,7 @@ export default function HomePage() {
           <div className="flex items-center justify-center space-x-4 mb-4">
             <Baymax size="small" />
             <p className="font-heading font-semibold text-2xl text-foreground">
-              "We're here to hug you"
+              We are here to hug you 💙
             </p>
           </div>
           <p className="font-body text-foreground/60">

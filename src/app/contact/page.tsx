@@ -164,7 +164,7 @@ export default function ContactPage() {
         >
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20">
             <p className="font-heading font-semibold text-xl text-foreground mb-2">
-              "We're here to hug you" 💙
+              We are here to hug you 💙
             </p>
             <p className="font-body text-foreground/70">
               Carezone - Không gian an toàn cho hành trình học tập của bạn

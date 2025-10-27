@@ -90,7 +90,7 @@ export default function WelcomePage() {
           className="mt-16"
         >
           <p className="font-body text-sm text-foreground/60">
-            "We're here to hug you" 💙
+            We are here to hug you 💙
           </p>
         </motion.div>
       </div>
