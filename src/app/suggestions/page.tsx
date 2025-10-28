@@ -201,10 +201,10 @@ export default function SuggestionsPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20 motion-gpu"
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-white/80 backdrop-blur-sm rounded-2xl p-4 md:p-8 shadow-lg border border-primary-blue/20 motion-gpu"
           >
             <div>
-              <h3 className="font-heading font-semibold text-2xl text-foreground mb-2">
+              <h3 className="font-heading font-semibold text-lg md:text-2xl text-foreground mb-2">
                 Minigame thả bong bóng
               </h3>
               <button
@@ -215,7 +215,7 @@ export default function SuggestionsPage() {
               </button>
             </div>
             <div>
-              <h3 className="font-heading font-semibold text-2xl text-foreground mb-2">
+              <h3 className="font-heading font-semibold text-lg md:text-2xl text-foreground mb-2">
                 Vẽ theo tâm trạng bạn hôm nay
               </h3>
               <button

@@ -17,7 +17,6 @@ export default function DrawingPage() {
     { name: "Đỏ", value: "#ff6b6b" },
     { name: "Vàng", value: "#ffd93d" },
     { name: "Tím", value: "#a8a8ff" },
-    { name: "Trắng", value: "#ffffff" },
     { name: "Nâu", value: "#8b4513" },
     { name: "Xanh lá", value: "#90ee90" },
   ];
