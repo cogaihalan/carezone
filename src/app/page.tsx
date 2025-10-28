@@ -11,7 +11,7 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-blue/10 via-cream-50 to-secondary-blue/10 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center">
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-blue mx-auto mb-4"></div>
         <p className="font-body text-foreground/70">Đang chuyển hướng...</p>

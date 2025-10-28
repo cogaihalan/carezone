@@ -6,7 +6,7 @@ import Baymax from "@/components/Baymax";
 
 export default function WelcomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-blue/10 via-cream-50 to-secondary-blue/10 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-4">
       <div className="max-w-4xl mx-auto text-center">
         {/* Baymax Animation */}
         <motion.div
@@ -15,7 +15,7 @@ export default function WelcomePage() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="mb-8"
         >
-          <Baymax size="large" className="mx-auto" />
+          <Baymax size="large" className="flex justify-center" />
         </motion.div>
 
         {/* Welcome Message */}
@@ -25,9 +25,9 @@ export default function WelcomePage() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-12"
         >
-          <h1 className="font-heading font-bold text-5xl md:text-6xl text-foreground mb-6">
+          <h1 className="font-heading font-bold text-5xl md:text-6xl text-blue-800 mb-6">
             Chào mừng bạn đến với
-            <span className="block text-primary-blue">
+            <span className="block text-primary-blue mt-3">
               hành trình của riêng mình!
             </span>
           </h1>

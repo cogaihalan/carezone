@@ -7,7 +7,7 @@ import Baymax from "@/components/Baymax";
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-primary-blue/5">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -18,7 +18,7 @@ export default function HomePage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="font-heading font-bold text-4xl md:text-5xl text-foreground mb-6">
+          <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
             Chào mừng đến với Carezone
           </h1>
           <p className="font-body text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed">
@@ -118,7 +118,12 @@ export default function HomePage() {
           className="text-center"
         >
           <div className="flex items-center justify-center space-x-4 mb-4">
-            <Baymax size="small" />
+            <Baymax
+              size="medium"
+              variant="hug"
+              objectFit="contain"
+              rounded="none"
+            />
             <p className="font-heading font-semibold text-2xl text-foreground">
               We are here to hug you 💙
             </p>

@@ -7,7 +7,7 @@ import { Mail, Phone, MapPin, Heart } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-primary-blue/5">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <Header />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -18,7 +18,7 @@ export default function ContactPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="font-heading font-bold text-4xl md:text-5xl text-foreground mb-6">
+          <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
             Contact
           </h1>
           <p className="font-body text-xl text-foreground/80 max-w-2xl mx-auto leading-relaxed">
