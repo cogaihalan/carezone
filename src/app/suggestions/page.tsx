@@ -35,15 +35,19 @@ export default function SuggestionsPage() {
     router.push("/bubble-pop-game");
   };
 
+  const navigateToDrawing = () => {
+    router.push("/drawing");
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-linear-to-b from-blue-50 to-white">
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-12 motion-gpu"
         >
           <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
             Gợi ý
@@ -58,7 +62,7 @@ export default function SuggestionsPage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-12"
+          className="mb-12 motion-gpu"
         >
           <AudioPlayer
             src="/audio/stream-sounds.mp3"
@@ -76,7 +80,7 @@ export default function SuggestionsPage() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20"
+            className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20 motion-gpu"
           >
             <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center">
               Góc tĩnh tâm
@@ -85,7 +89,7 @@ export default function SuggestionsPage() {
             <div className="text-center mb-6">
               <div className="w-32 h-32 mx-auto mb-4 relative">
                 <motion.div
-                  className="w-full h-full bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center shadow-lg"
+                  className="w-full h-full bg-linear-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center shadow-lg motion-gpu"
                   animate={
                     isMeditating
                       ? {
@@ -108,7 +112,7 @@ export default function SuggestionsPage() {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute inset-0 flex items-center justify-center motion-gpu"
                   >
                     <div className="w-24 h-24 border-4 border-primary-blue/30 border-t-primary-blue rounded-full animate-spin"></div>
                   </motion.div>
@@ -174,7 +178,7 @@ export default function SuggestionsPage() {
                 </video>
 
                 {/* Overlay with meditation timer */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
+                <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-6">
                   <div className="text-center text-white">
                     <h3 className="font-heading font-semibold text-xl mb-2">
                       Thời gian thiền định
@@ -197,15 +201,30 @@ export default function SuggestionsPage() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20"
+            className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20 motion-gpu"
           >
-            <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center">
-              Minigame thả bong bóng
-            </h3>
-            <button onClick={navigateToBubbleGame} className="mx-auto px-6 py-3 rounded-xl font-heading font-semibold transition-all duration-300 bg-primary-blue hover:bg-primary-blue/80 text-white transform">
-              Chơi ngay
-            </button>
-
+            <div>
+              <h3 className="font-heading font-semibold text-2xl text-foreground mb-2">
+                Minigame thả bong bóng
+              </h3>
+              <button
+                onClick={navigateToBubbleGame}
+                className="mx-auto px-6 py-3 rounded-xl font-heading font-semibold transition-all duration-300 bg-primary-blue hover:bg-primary-blue/80 text-white transform"
+              >
+                Chơi ngay
+              </button>
+            </div>
+            <div>
+              <h3 className="font-heading font-semibold text-2xl text-foreground mb-2">
+                Vẽ theo tâm trạng bạn hôm nay
+              </h3>
+              <button
+                onClick={navigateToDrawing}
+                className="mx-auto px-6 py-3 rounded-xl font-heading font-semibold transition-all duration-300 bg-primary-blue hover:bg-primary-blue/80 text-white transform"
+              >
+                Cùng vẽ nào
+              </button>
+            </div>
           </motion.div>
         </div>
       </main>

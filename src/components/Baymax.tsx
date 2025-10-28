@@ -8,7 +8,7 @@ interface BaymaxProps {
   className?: string;
   variant?: "hello" | "hug";
   objectFit?: "cover" | "contain";
-  rounded?: "full" | "none";
+  rounded?: "full" | "none" | "lg" | "md" | "sm";
 }
 
 export default function Baymax({
@@ -19,8 +19,8 @@ export default function Baymax({
   rounded = "full",
 }: BaymaxProps) {
   const sizeClasses = {
-    small: "w-16 h-16",
-    medium: "w-32 h-32",
+    small: "w-20 h-20",
+    medium: "w-36 h-36",
     large: "w-48 h-48",
   };
 
@@ -29,7 +29,7 @@ export default function Baymax({
     if (variant === "hug") {
       return "/images/baymax-hug.png";
     }
-    return "/images/baymax-hello.webp";
+    return "/images/baymax-hello.png";
   };
 
   return (

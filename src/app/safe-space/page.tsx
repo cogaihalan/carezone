@@ -30,7 +30,6 @@ export default function SafeSpacePage() {
     }, 100);
   };
 
-
   // Clean up ripple animation after it completes
   useEffect(() => {
     if (rippleAnimation) {
@@ -53,7 +52,7 @@ export default function SafeSpacePage() {
       <AnimatePresence>
         {rippleAnimation && (
           <motion.div
-            className="fixed pointer-events-none z-50"
+            className="fixed pointer-events-none z-50 motion-gpu"
             style={{
               left: rippleAnimation.x,
               top: rippleAnimation.y,

@@ -38,7 +38,7 @@ export default function Modal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 motion-gpu"
           onClick={handleBackdropClick}
         >
           <motion.div
@@ -46,7 +46,7 @@ export default function Modal({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ type: "spring", duration: 0.5 }}
-            className={`relative bg-white rounded-2xl shadow-2xl w-full ${maxWidth} ${maxHeight} overflow-hidden`}
+            className={`relative bg-white rounded-2xl shadow-2xl w-full ${maxWidth} ${maxHeight} overflow-hidden motion-gpu`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header with title and close button */}

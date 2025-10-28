@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import Header from "../../components/Header";
 import { Palette, Eraser, RotateCcw } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -41,7 +40,26 @@ export default function DrawingPage() {
     ctx.lineWidth = brushSize;
   }, [selectedColor, brushSize]);
 
-  const startDrawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const getEventPos = (
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+
+    const rect = canvas.getBoundingClientRect();
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+    const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;
+
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top,
+    };
+  };
+
+  const startDrawing = (
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
+    e.preventDefault(); // Prevent scrolling on mobile
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -50,15 +68,15 @@ export default function DrawingPage() {
 
     setIsDrawing(true);
 
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = getEventPos(e);
 
     ctx.beginPath();
     ctx.moveTo(x, y);
   };
 
-  const draw = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const draw = (
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
     if (!isDrawing) return;
 
     const canvas = canvasRef.current;
@@ -67,9 +85,7 @@ export default function DrawingPage() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const rect = canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    const { x, y } = getEventPos(e);
 
     if (isErasing) {
       ctx.globalCompositeOperation = "destination-out";
@@ -136,21 +152,21 @@ export default function DrawingPage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to  -b from-blue-50 to-white"
+      className="min-h-screen bg-linear-to-b from-blue-50 to-white motion-gpu"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-x      <main className="max-w-6xl mx-auto px-6 py-12">
+      <main className="max-w-6xl mx-auto px-6 py-12">
         {/* Page title */}
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-8 motion-gpu"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <motion.h1
-            className="text-4xl md:text-5xl font-bold text-blue-800 mb-6"
+            className="text-4xl md:text-5xl font-bold text-blue-800 mb-6 motion-gpu"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -158,7 +174,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
             Drawing
           </motion.h1>
           <motion.p
-            className="text-xl text-gray-700 mb-4"
+            className="text-xl text-gray-700 mb-4 motion-gpu"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -169,23 +185,25 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
 
         {/* Drawing tools */}
         <motion.div
-          className="bg-white rounded-2xl shadow-lg p-6 mb-8"
+          className="bg-white rounded-2xl shadow-lg p-6 mb-8 motion-gpu"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.0 }}
         >
-          <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-6">
             {/* Color palette */}
             <motion.div
-              className="flex items-center space-x-2"
+              className="flex flex-col items-start gap-2 sm:flex-row sm:items-center motion-gpu"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 1.2 }}
             >
-              <Palette className="w-5 h-5 text-gray-600" />
-              <span className="text-sm font-medium text-gray-700">
-                Màu sắc:
-              </span>
+              <div className="flex items-center gap-2">
+                <Palette className="w-5 h-5 text-gray-600" />
+                <span className="text-sm font-medium text-gray-700">
+                  Màu sắc:
+                </span>
+              </div>
               <div className="flex space-x-2">
                 {colors.map((color, index) => (
                   <motion.button
@@ -194,7 +212,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
                       setSelectedColor(color.value);
                       setIsErasing(false);
                     }}
-                    className={`w-8 h-8 rounded-full border-2 ${
+                    className={`w-10 h-10 sm:w-8 sm:h-8 rounded-full border-2 motion-gpu ${
                       selectedColor === color.value
                         ? "border-gray-400"
                         : "border-gray-200"
@@ -213,7 +231,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
 
             {/* Brush size */}
             <motion.div
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-2 motion-gpu"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 1.4 }}
@@ -227,7 +245,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
                 max="20"
                 value={brushSize}
                 onChange={(e) => setBrushSize(Number(e.target.value))}
-                className="w-20"
+                className="w-24 sm:w-20"
               />
               <span className="text-sm text-gray-600">{brushSize}px</span>
             </motion.div>
@@ -235,7 +253,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
             {/* Eraser */}
             <motion.button
               onClick={() => setIsErasing(!isErasing)}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 ${
+              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 motion-gpu ${
                 isErasing
                   ? "bg-red-100 text-red-700"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -253,7 +271,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
             {/* Clear canvas */}
             <motion.button
               onClick={clearCanvas}
-              className="flex items-center space-x-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all duration-300"
+              className="flex items-center space-x-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition-all duration-300 motion-gpu"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 1.8 }}
@@ -268,7 +286,7 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
 
         {/* Canvas */}
         <motion.div
-          className="bg-white rounded-2xl shadow-lg p-6"
+          className="bg-white rounded-2xl shadow-lg p-6 motion-gpu"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 2.0 }}
@@ -276,12 +294,18 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
           <div className="flex justify-center">
             <motion.canvas
               ref={canvasRef}
-              className="border-2 border-gray-200 rounded-lg cursor-crosshair bg-white"
-              style={{ width: "100%", maxWidth: "800px", height: "500px" }}
+              className="border-2 border-gray-200 rounded-lg cursor-crosshair bg-white touch-none h-[500px] md:h-[600px] motion-gpu"
+              style={{
+                width: "100%",
+                maxWidth: "800px",
+              }}
               onMouseDown={startDrawing}
               onMouseMove={draw}
               onMouseUp={stopDrawing}
               onMouseLeave={stopDrawing}
+              onTouchStart={startDrawing}
+              onTouchMove={draw}
+              onTouchEnd={stopDrawing}
               transition={{ duration: 0.3 }}
             />
           </div>
@@ -289,13 +313,15 @@ x      <main className="max-w-6xl mx-auto px-6 py-12">
 
         {/* Instructions */}
         <motion.div
-          className="text-center mt-8"
+          className="text-center mt-8 motion-gpu"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 2.2 }}
         >
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm sm:text-base">
             💡 Mẹo: Sử dụng màu sắc khác nhau để thể hiện cảm xúc của bạn
+            <br />
+            📱 Trên điện thoại: Chạm và kéo để vẽ, chạm vào màu để chọn
           </p>
         </motion.div>
       </main>

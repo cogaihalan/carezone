@@ -6,14 +6,14 @@ import Baymax from "@/components/Baymax";
 
 export default function WelcomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-linear-to-b from-blue-50 to-white flex items-center justify-center px-4">
       <div className="max-w-4xl mx-auto text-center">
         {/* Baymax Animation */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-8"
+          className="mb-8 motion-gpu"
         >
           <Baymax size="large" className="flex justify-center" />
         </motion.div>
@@ -23,7 +23,7 @@ export default function WelcomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-12"
+          className="mb-12 motion-gpu"
         >
           <h1 className="font-heading font-bold text-5xl md:text-6xl text-blue-800 mb-6">
             Chào mừng bạn đến với
@@ -43,6 +43,7 @@ export default function WelcomePage() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.6 }}
+          className="motion-gpu"
         >
           <Link
             href="/home"
@@ -52,6 +53,7 @@ export default function WelcomePage() {
             <motion.div
               animate={{ x: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
+              className="motion-gpu"
             >
               →
             </motion.div>

@@ -15,8 +15,8 @@ export default function Header() {
       setIsScrolled(window.scrollY > 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
@@ -32,7 +32,7 @@ export default function Header() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  if (pathname === '/welcome' || pathname === '/') {
+  if (pathname === "/welcome" || pathname === "/") {
     return null;
   }
 
@@ -49,9 +49,9 @@ export default function Header() {
               <Image
                 src="/logo-carezone.png"
                 alt="Carezone"
-                width={isScrolled ? 80 : 120}
-                height={isScrolled ? 67 : 100}
-                className="transition-all duration-300 w-15 h-auto md:w-20"
+                width={isScrolled ? 80 : 100}
+                height={isScrolled ? 67 : 80}
+                className="transition-[width,height] duration-300 ease-out max-md:w-15"
               />
             </Link>
           </div>
@@ -62,7 +62,7 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-3 py-2 rounded-lg text-md font-semibold transition-all duration-200 hover:scale-105 ${
+                className={`px-3 py-2 rounded-lg text-md font-semibold transition-all duration-200 ${
                   pathname === item.href
                     ? "text-blue-800 bg-blue-100"
                     : "text-black hover:text-blue-800 hover:bg-blue-100"
@@ -110,11 +110,15 @@ export default function Header() {
 
         {/* Mobile menu */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
             isMobileMenuOpen
-              ? "max-h-96 opacity-100 pb-4"
+              ? "max-h-80 opacity-100 pb-4"
               : "max-h-0 opacity-0 pb-0"
           }`}
+          style={{
+            transitionProperty: "max-height, opacity, padding-bottom",
+            transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+          }}
         >
           <div className="flex flex-col space-y-2 pt-2">
             {navItems.map((item) => (

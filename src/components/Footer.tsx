@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const pathname = usePathname();
-  if (pathname === '/welcome' || pathname === '/') {
+  if (pathname === "/welcome" || pathname === "/") {
     return null;
   }
   return (
@@ -16,12 +16,12 @@ export default function Footer() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center"
+          className="text-center motion-gpu"
         >
           <div className="flex flex-col gap-4 items-center justify-center mb-4 md:flex-row">
             <Baymax
               size="medium"
-              variant="hug"          
+              variant="hug"
               objectFit="contain"
               rounded="none"
             />

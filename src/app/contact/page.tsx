@@ -13,7 +13,7 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-16 motion-gpu"
         >
           <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
             Contact
@@ -28,7 +28,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="flex flex-col items-center justify-center space-y-8"
+            className="flex flex-col items-center justify-center space-y-8 motion-gpu"
           >
             <motion.div
               animate={{
@@ -40,6 +40,7 @@ export default function ContactPage() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
+              className="motion-gpu"
             >
               <Baymax size="large" />
             </motion.div>
@@ -73,7 +74,7 @@ export default function ContactPage() {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="space-y-8"
+            className="space-y-8 motion-gpu"
           >
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20">
               <h3 className="font-heading font-semibold text-2xl text-foreground mb-6">
@@ -90,7 +91,12 @@ export default function ContactPage() {
                       Email
                     </p>
                     <p className="font-body text-foreground/70">
-                      <a href="mailto:Dh1740895@gmail.com" className="text-primary-blue hover:underline">Dh1740895@gmail.com</a>
+                      <a
+                        href="mailto:Dh1740895@gmail.com"
+                        className="text-primary-blue hover:underline"
+                      >
+                        Dh1740895@gmail.com
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -104,7 +110,12 @@ export default function ContactPage() {
                       Điện thoại
                     </p>
                     <p className="font-body text-foreground/70">
-                      <a href="tel:+84929365816" className="text-primary-blue hover:underline">0929365816</a>
+                      <a
+                        href="tel:+84929365816"
+                        className="text-primary-blue hover:underline"
+                      >
+                        0929365816
+                      </a>
                     </p>
                   </div>
                 </div>
@@ -118,7 +129,7 @@ export default function ContactPage() {
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-primary-blue/20 rounded-full"
+              className="absolute w-2 h-2 bg-primary-blue/20 rounded-full motion-gpu"
               style={{
                 left: `${15 + i * 15}%`,
                 top: `${25 + (i % 3) * 20}%`,

@@ -121,7 +121,7 @@ export default function AudioPlayer({
     >
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className={`font-heading font-semibold text-lg ${isDarkMode ? "text-white" : "text-foreground"} mb-1`}>
+          <h3 className={`font-heading font-semibold text-lg text-left ${isDarkMode ? "text-white" : "text-foreground"} mb-1`}>
             {title}
           </h3>
           <p className={`font-body text-sm ${isDarkMode ? "text-gray-300" : "text-foreground/70"}`}>

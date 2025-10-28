@@ -16,7 +16,7 @@ interface BubbleProps {
 export default function Bubble({ bubble, onPop }: BubbleProps) {
   return (
     <motion.div
-      className={`absolute rounded-full bg-gradient-to-br ${bubble.colorClass} cursor-pointer`}
+      className={`absolute rounded-full bg-linear-to-br ${bubble.colorClass} cursor-pointer motion-gpu`}
       style={{
         width: bubble.size,
         height: bubble.size,
@@ -25,12 +25,6 @@ export default function Bubble({ bubble, onPop }: BubbleProps) {
       }}
       initial={{ scale: 0.2, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      exit={{
-        scale: 1.5,
-        opacity: 0,
-        filter: "blur(10px)",
-        transition: { duration: 0.1 },
-      }}
       onClick={onPop}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}

@@ -62,14 +62,14 @@ export default function StoriesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blxue-50 to-white overflow-x-hidden">
+    <div className="min-h-screen bg-linear-to-b from-blxue-50 to-white overflow-x-hidden">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-12 motion-gpu"
         >
           <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
             Stories
@@ -84,7 +84,7 @@ export default function StoriesPage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-12"
+          className="mb-12 motion-gpu"
         >
           <AudioPlayer
             src="/audio/lo-fi-alarm-clock.mp3"
@@ -101,13 +101,13 @@ export default function StoriesPage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-2xl mx-auto"
+          className="max-w-2xl mx-auto motion-gpu"
         >
           <div className="relative overflow-hidden">
             {/* Balloon Container */}
             <div className="relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-primary-blue/20 overflow-hidden">
               {/* Balloon Shape Background */}
-              <div className="absolute inset-0 bg-gradient-to-b from-pink-100 to-blue-100 rounded-3xl opacity-50"></div>
+              <div className="absolute inset-0 bg-linear-to-b from-pink-100 to-blue-100 rounded-3xl opacity-50"></div>
 
               <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center relative z-10">
                 Viết tâm sự vào bong bóng
@@ -118,7 +118,7 @@ export default function StoriesPage() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Hãy viết ra những tâm sự, lo lắng hay bất kỳ điều gì bạn muốn chia sẻ với trời mây..."
-                  className="w-full h-48 p-4 border-2 border-primary-blue/30 rounded-xl resize-none focus:outline-none focus:border-primary-blue font-body text-foreground placeholder-foreground/50 bg-white/70 backdrop-blur-sm"
+                  className="w-full h-48 p-4 border-2 border-primary-blue/30 rounded-xl resize-none focus:outline-none focus:border-primary-blue font-body text-foreground placeholder-foreground/50 bg-white/70 backdrop-blur-sm motion-gpu"
                   disabled={isSubmitted}
                   animate={{
                     opacity: isSubmitted ? 0.3 : 1,
@@ -134,7 +134,7 @@ export default function StoriesPage() {
                   {[...Array(6)].map((_, i) => (
                     <motion.div
                       key={i}
-                      className="absolute w-3 h-4 bg-gradient-to-b from-pink-200 to-blue-200 rounded-full opacity-60"
+                      className="absolute w-3 h-4 bg-linear-to-b from-pink-200 to-blue-200 rounded-full opacity-60 motion-gpu"
                       style={{
                         left: `${15 + i * 12}%`,
                         top: `${5 + (i % 3) * 15}%`,
@@ -157,9 +157,9 @@ export default function StoriesPage() {
               <motion.button
                 onClick={handleSubmit}
                 disabled={!message.trim() || isSubmitted}
-                className={`w-full mt-6 py-3 px-6 rounded-xl font-heading font-semibold text-lg transition-all duration-300 relative z-10 ${
+                className={`w-full mt-6 py-3 px-6 rounded-xl font-heading font-semibold text-lg transition-all duration-300 relative z-10 motion-gpu ${
                   message.trim() && !isSubmitted
-                    ? "bg-gradient-to-r from-pink-400 to-blue-400 hover:from-pink-500 hover:to-blue-500 text-white transform shadow-lg"
+                    ? "bg-linear-to-r from-pink-400 to-blue-400 hover:from-pink-500 hover:to-blue-500 text-white transform shadow-lg"
                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                 }`}
                 whileHover={message.trim() && !isSubmitted ? { scale: 1 } : {}}
@@ -186,12 +186,12 @@ export default function StoriesPage() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute inset-0 pointer-events-none z-20 overflow-hidden"
+                  className="absolute inset-0 pointer-events-none z-20 overflow-hidden motion-gpu"
                 >
                   {bubbles.map((bubble, index) => (
                     <motion.div
                       key={bubble.id}
-                      className="absolute"
+                      className="absolute motion-gpu"
                       style={{
                         left: `${bubble.x}px`,
                         top: `${bubble.y}px`,

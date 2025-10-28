@@ -14,7 +14,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-16 motion-gpu"
         >
           <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
             Chào mừng đến với Carezone
@@ -30,7 +30,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-16"
+          className="mb-16 motion-gpu"
         >
           <div className="grid md:grid-cols-3 gap-8">
             {/* Main Relaxation Audio */}
@@ -67,6 +67,7 @@ export default function HomePage() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
+                className="motion-gpu"
               >
                 <Baymax size="large" />
               </motion.div>
@@ -79,7 +80,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="grid md:grid-cols-3 gap-8 mb-16"
+          className="grid md:grid-cols-3 gap-8 mb-16 motion-gpu"
         >
           <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-blue/20 text-center">
             <div className="w-16 h-16 bg-primary-blue/20 rounded-full flex items-center justify-center mx-auto mb-4">
