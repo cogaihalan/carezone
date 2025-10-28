@@ -3,11 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems = [
     { name: "Home", href: "/home" },
@@ -22,8 +32,12 @@ export default function Header() {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  if (pathname === '/welcome' || pathname === '/') {
+    return null;
+  }
+
   return (
-    <header className="bg-white shadow-lg">
+    <header className="sticky top-0 z-50 bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-2">
           {/* Logo và tên web */}
@@ -35,14 +49,15 @@ export default function Header() {
               <Image
                 src="/logo-carezone.png"
                 alt="Carezone"
-                width={120}
-                height={100}
+                width={isScrolled ? 80 : 120}
+                height={isScrolled ? 67 : 100}
+                className="transition-all duration-300 w-15 h-auto md:w-20"
               />
             </Link>
           </div>
 
           {/* Navigation menu */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -59,10 +74,10 @@ export default function Header() {
           </nav>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={toggleMobileMenu}
-              className="text-blue-800 hover:text-blue-100 hover:scale-110 transition-all duration-200 p-2 rounded-md hover:bg-white/10"
+              className="text-blue-500 hover:text-blue-300 transition-all duration-200 p-2 rounded-md hover:bg-white/10"
               aria-label="Toggle mobile menu"
             >
               <svg
@@ -95,7 +110,7 @@ export default function Header() {
 
         {/* Mobile menu */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
             isMobileMenuOpen
               ? "max-h-96 opacity-100 pb-4"
               : "max-h-0 opacity-0 pb-0"
@@ -107,10 +122,10 @@ export default function Header() {
                 key={item.name}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   pathname === item.href
                     ? "text-blue-800 bg-blue-100 shadow-md"
-                    : "text-blue-800 hover:text-blue-100 hover:bg-blue-100"
+                    : "text-blue-500 hover:bg-blue-100 hover:text-blue-800"
                 }`}
               >
                 {item.name}

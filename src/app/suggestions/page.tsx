@@ -3,10 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import Header from "@/components/Header";
 import AudioPlayer from "@/components/AudioPlayer";
 import StartScreen from "@/components/bubble-pop-game/StartScreen";
-import Modal from "@/components/Modal";
 
 export default function SuggestionsPage() {
   const router = useRouter();
@@ -39,14 +37,12 @@ export default function SuggestionsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <Header />
-
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
           <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
@@ -61,7 +57,7 @@ export default function SuggestionsPage() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12"
         >
           <AudioPlayer
@@ -79,7 +75,7 @@ export default function SuggestionsPage() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
             className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20"
           >
             <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center">
@@ -200,16 +196,16 @@ export default function SuggestionsPage() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20"
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20"
           >
             <h3 className="font-heading font-semibold text-2xl text-foreground mb-6 text-center">
               Minigame thả bong bóng
             </h3>
+            <button onClick={navigateToBubbleGame} className="mx-auto px-6 py-3 rounded-xl font-heading font-semibold transition-all duration-300 bg-primary-blue hover:bg-primary-blue/80 text-white transform">
+              Chơi ngay
+            </button>
 
-            <div className="flex justify-center items-center min-h-[400px]">
-              <StartScreen onStart={navigateToBubbleGame} />
-            </div>
           </motion.div>
         </div>
       </main>

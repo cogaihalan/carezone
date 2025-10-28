@@ -1,20 +1,17 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Header from "../../components/Header";
-import { Moon, Sun, Volume2, VolumeX, Play, Pause } from "lucide-react";
+import AudioPlayer from "../../components/AudioPlayer";
+import { Moon, Sun } from "lucide-react";
 
 export default function SafeSpacePage() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
   const [rippleAnimation, setRippleAnimation] = useState<{
     x: number;
     y: number;
     isDark: boolean;
   } | null>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
 
   const toggleDarkMode = (event: React.MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -33,23 +30,6 @@ export default function SafeSpacePage() {
     }, 100);
   };
 
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
 
   // Clean up ripple animation after it completes
   useEffect(() => {
@@ -65,8 +45,8 @@ export default function SafeSpacePage() {
     <div
       className={`min-h-screen transition-all duration-500 ${
         isDarkMode
-          ? "bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"
-          : "bg-gradient-to-b from-blue-50 to-white"
+          ? "bg-linear-to-br from-gray-900 via-gray-800 to-gray-900"
+          : "bg-linear-to-b from-blue-50 to-white"
       }`}
     >
       {/* Ripple animation overlay */}
@@ -92,7 +72,7 @@ export default function SafeSpacePage() {
               opacity: 0,
             }}
             transition={{
-              duration: 0.8,
+              duration: 0.5,
               ease: "easeOut",
             }}
           >
@@ -104,8 +84,6 @@ export default function SafeSpacePage() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Header />
 
       <main className="max-w-4xl mx-auto px-6 py-12">
         {/* Theme toggle */}
@@ -153,65 +131,16 @@ export default function SafeSpacePage() {
           </div>
 
           {/* Audio player */}
-          <div
-            className={`rounded-2xl shadow-lg p-8 mb-12 max-w-2xl mx-auto transition-all duration-500 ${
-              isDarkMode ? "bg-gray-800" : "bg-white"
-            }`}
-          >
-            <div className="text-center mb-6">
-              <h2
-                className={`text-2xl font-semibold mb-2 transition-colors duration-500 ${
-                  isDarkMode ? "text-white" : "text-gray-800"
-                }`}
-              >
-                Pink Noise
-              </h2>
-              <p
-                className={`transition-colors duration-500 ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
-              >
-                Âm thanh nhẹ nhàng ru ngủ
-              </p>
-            </div>
-
-            <div className="flex items-center justify-center space-x-4">
-              <button
-                onClick={togglePlay}
-                className={`w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 ${
-                  isDarkMode
-                    ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : "bg-blue-500 hover:bg-blue-600 text-white"
-                }`}
-              >
-                {isPlaying ? (
-                  <Pause className="w-8 h-8" />
-                ) : (
-                  <Play className="w-8 h-8 ml-1" />
-                )}
-              </button>
-
-              <button
-                onClick={toggleMute}
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  isDarkMode
-                    ? "bg-gray-600 hover:bg-gray-500 text-gray-300"
-                    : "bg-gray-200 hover:bg-gray-300 text-gray-700"
-                }`}
-              >
-                {isMuted ? (
-                  <VolumeX className="w-6 h-6" />
-                ) : (
-                  <Volume2 className="w-6 h-6" />
-                )}
-              </button>
-            </div>
-
-            <audio ref={audioRef} loop preload="auto" className="hidden">
-              <source src="/audio/pink-noise.mp3" type="audio/mpeg" />
-              <source src="/audio/pink-noise.ogg" type="audio/ogg" />
-              Trình duyệt của bạn không hỗ trợ phát âm thanh.
-            </audio>
+          <div className="mb-12 max-w-2xl mx-auto">
+            <AudioPlayer
+              isDarkMode={isDarkMode}
+              src="/audio/asmr-pink-noise-rain-fire-waterfall-mix.mp3"
+              title="Pink Noise"
+              frequency={528}
+              duration={120}
+              loop={true}
+              className="transition-all duration-500"
+            />
           </div>
 
           {/* Rest message */}

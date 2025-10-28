@@ -1,62 +1,38 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import Header from "@/components/Header";
-import StartScreen from "@/components/bubble-pop-game/StartScreen";
-import GameScreen from "@/components/bubble-pop-game/GameScreen";
-import GameOverScreen from "@/components/bubble-pop-game/GameOverScreen";
+import { useState } from "react"
+import GameScreen from "@/components/bubble-pop-game/GameScreen"
+import StartScreen from "@/components/bubble-pop-game/StartScreen"
+import GameOverScreen from "@/components/bubble-pop-game/GameOverScreen"
 
-type GameState = "start" | "playing" | "gameOver";
+export default function BubblePopGame() {
+  const [gameStarted, setGameStarted] = useState(false)
+  const [gameOver, setGameOver] = useState(false)
+  const [finalScore, setFinalScore] = useState(0)
 
-export default function BubblePopGamePage() {
-  const router = useRouter();
-  const [gameState, setGameState] = useState<GameState>("start");
-  const [score, setScore] = useState(0);
+  const handleGameOver = (score: number) => {
+    setFinalScore(score)
+    setGameOver(true)
+    setGameStarted(false)
+  }
 
-  // Game flow handlers
-  const startGame = () => {
-    setGameState("playing");
-    setScore(0);
-  };
+  const handlePlayAgain = () => {
+    setGameOver(false)
+    setGameStarted(true)
+  }
 
-  const endGame = (finalScore: number) => {
-    setScore(finalScore);
-    setGameState("start");
-  };
-
-  const exitGame = () => {
-    router.push("/suggestions");
-  };
-
-  const playAgain = () => {
-    setGameState("playing");
-    setScore(0);
-  };
+  const handleExit = () => {
+    setGameStarted(false)
+    setGameOver(false)
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <Header />
-
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Game Container */}
-
-        <div className="flex justify-center items-center min-h-[500px]">
-          <AnimatePresence mode="wait">
-            {gameState === "start" && (
-              <StartScreen key="start" onStart={startGame} />
-            )}
-            {gameState === "playing" && (
-              <GameScreen
-                key="playing"
-                onGameOver={endGame}
-                onExit={exitGame}
-              />
-            )}
-          </AnimatePresence>
-        </div>
-      </main>
-    </div>
-  );
+    <main className="flex min-h-[80vh] flex-col items-center justify-between bg-linear-to-b from-purple-100 to-blue-200 p-4">
+      <div className="grow flex items-center justify-center w-full">
+        {!gameStarted && !gameOver && <StartScreen onStart={() => setGameStarted(true)} />}
+        {gameStarted && <GameScreen onGameOver={handleGameOver} onExit={handleExit} />}
+        {gameOver && <GameOverScreen score={finalScore} onPlayAgain={handlePlayAgain} onExit={handleExit} />}
+      </div>
+    </main>
+  )
 }

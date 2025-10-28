@@ -22,7 +22,7 @@ export default function WelcomePage() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12"
         >
           <h1 className="font-heading font-bold text-5xl md:text-6xl text-blue-800 mb-6">
@@ -81,18 +81,6 @@ export default function WelcomePage() {
             />
           ))}
         </div>
-
-        {/* Bottom Message */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="mt-16"
-        >
-          <p className="font-body text-sm text-foreground/60">
-            We are here to hug you 💙
-          </p>
-        </motion.div>
       </div>
     </div>
   );

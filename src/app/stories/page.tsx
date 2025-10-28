@@ -62,15 +62,13 @@ export default function StoriesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white overflow-x-hidden">
-      <Header />
-
+    <div className="min-h-screen bg-gradient-to-b from-blxue-50 to-white overflow-x-hidden">
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Page Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
           <h1 className="font-heading font-bold text-4xl md:text-5xl text-blue-800 mb-6">
@@ -85,13 +83,13 @@ export default function StoriesPage() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12"
         >
           <AudioPlayer
             src="/audio/lo-fi-alarm-clock.mp3"
             frequency={432}
-            duration={240}
+            duration={59}
             loop={true}
             title="Nhạc Lofi thư giãn"
             className="max-w-2xl mx-auto"
@@ -102,7 +100,7 @@ export default function StoriesPage() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
           className="max-w-2xl mx-auto"
         >
           <div className="relative overflow-hidden">

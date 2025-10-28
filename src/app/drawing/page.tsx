@@ -136,20 +136,18 @@ export default function DrawingPage() {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-b from-blue-50 to-white"
+      className="min-h-screen bg-gradient-to  -b from-blue-50 to-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
     >
-      <Header />
-
-      <main className="max-w-6xl mx-auto px-6 py-12">
+x      <main className="max-w-6xl mx-auto px-6 py-12">
         {/* Page title */}
         <motion.div
           className="text-center mb-8"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
         >
           <motion.h1
             className="text-4xl md:text-5xl font-bold text-blue-800 mb-6"
@@ -174,7 +172,7 @@ export default function DrawingPage() {
           className="bg-white rounded-2xl shadow-lg p-6 mb-8"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.0 }}
+          transition={{ duration: 0.5, delay: 1.0 }}
         >
           <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
             {/* Color palette */}
@@ -273,7 +271,7 @@ export default function DrawingPage() {
           className="bg-white rounded-2xl shadow-lg p-6"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 2.0 }}
+          transition={{ duration: 0.5, delay: 2.0 }}
         >
           <div className="flex justify-center">
             <motion.canvas

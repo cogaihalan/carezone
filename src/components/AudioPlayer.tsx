@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Play, Pause, Volume2, VolumeX } from "lucide-react";
 
 interface AudioPlayerProps {
+  isDarkMode?: boolean;
   src: string;
   frequency?: number;
   duration?: number;
@@ -19,6 +20,7 @@ export default function AudioPlayer({
   loop = true,
   title = "Âm thanh thư giãn",
   className = "",
+  isDarkMode = false,
 }: AudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -115,14 +117,14 @@ export default function AudioPlayer({
 
   return (
     <div
-      className={`bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-blue/20 ${className}`}
+      className={`${isDarkMode ? "bg-gray-700 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-blue/20" : "bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-primary-blue/20"} ${className}`}
     >
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="font-heading font-semibold text-lg text-foreground mb-1">
+          <h3 className={`font-heading font-semibold text-lg ${isDarkMode ? "text-white" : "text-foreground"} mb-1`}>
             {title}
           </h3>
-          <p className="font-body text-sm text-foreground/70">
+          <p className={`font-body text-sm ${isDarkMode ? "text-gray-300" : "text-foreground/70"}`}>
             Tần số: {frequency}Hz • Thời lượng: {duration}s
           </p>
         </div>

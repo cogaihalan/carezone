@@ -22,7 +22,7 @@ export default function StartScreen({ onStart }: StartScreenProps) {
       >
         <div className="relative">
           <motion.div
-            className="absolute w-16 h-16 rounded-full bg-gradient-to-br from-blue-300 to-blue-500 shadow-lg"
+            className="absolute w-16 h-16 rounded-full bg-linear-to-br from-blue-300 to-blue-500 shadow-lg"
             style={{ top: "-10px", left: "-20px" }}
             animate={{ y: [0, -10, 0] }}
             transition={{
@@ -34,7 +34,7 @@ export default function StartScreen({ onStart }: StartScreenProps) {
             <div className="absolute w-5 h-5 rounded-full bg-white/50 top-3 left-3" />
           </motion.div>
           <motion.div
-            className="absolute w-12 h-12 rounded-full bg-gradient-to-br from-purple-300 to-purple-500 shadow-lg"
+            className="absolute w-12 h-12 rounded-full bg-linear-to-br from-purple-300 to-purple-500 shadow-lg"
             style={{ top: "20px", right: "-30px" }}
             animate={{ y: [0, -8, 0] }}
             transition={{
@@ -85,7 +85,7 @@ export default function StartScreen({ onStart }: StartScreenProps) {
       </motion.div>
 
       <motion.button
-        className="px-8 py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-xl font-semibold shadow-lg hover:shadow-xl transition-all"
+        className="px-8 py-4 bg-linear-to-r from-purple-500 to-blue-500 text-white rounded-full text-xl font-semibold shadow-lg hover:shadow-xl transition-all"
         onClick={onStart}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

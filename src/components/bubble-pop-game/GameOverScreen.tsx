@@ -15,7 +15,7 @@ export default function GameOverScreen({
 }: GameOverScreenProps) {
   return (
     <motion.div
-      className="text-center bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl w-full"
+      className="text-center bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-xl md:w-3/5 w-full mx-auto"
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
@@ -36,7 +36,9 @@ export default function GameOverScreen({
         transition={{ delay: 0.4 }}
       >
         <p className="text-lg text-gray-700 mb-2">
-          Bạn đã bỏ lỡ quá nhiều bong bóng!
+          Cảm ơn bạn đã dành thời gian quý báu cho mình. Mỗi người là một hành
+          trình khác nhau, bạn đang đi trên con đường chính mình. Chúc bạn luôn
+          vững vàng và dịu dàng với chính mình!
         </p>
         <div className="text-3xl font-bold text-purple-700 mt-4">
           Điểm cuối: {score}
