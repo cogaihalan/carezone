@@ -65,9 +65,9 @@ export default function SuggestionsPage() {
           className="mb-12 motion-gpu"
         >
           <AudioPlayer
-            src="/audio/stream-sounds.mp3"
+            src="/audio/stream-sound.mp3"
             frequency={396}
-            duration={300}
+            duration={299}
             loop={true}
             title="Tiếng suối thư giãn"
             className="max-w-2xl mx-auto"
@@ -131,7 +131,7 @@ export default function SuggestionsPage() {
                 </p>
               </div>
 
-              <div className="space-x-4">
+              <div className="flex flex-col md:flex-row gap-4 w-fit mx-auto">
                 <button
                   onClick={startMeditation}
                   disabled={isMeditating}
@@ -176,22 +176,6 @@ export default function SuggestionsPage() {
                   <source src="/video/tea.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-
-                {/* Overlay with meditation timer */}
-                <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-6">
-                  <div className="text-center text-white">
-                    <h3 className="font-heading font-semibold text-xl mb-2">
-                      Thời gian thiền định
-                    </h3>
-                    <p className="font-heading font-bold text-2xl">
-                      {Math.floor(meditationTime / 60)}:
-                      {(meditationTime % 60).toString().padStart(2, "0")}
-                    </p>
-                    <p className="font-body text-sm mt-2 opacity-90">
-                      Nhìn vào video và tập trung vào hơi thở của bạn
-                    </p>
-                  </div>
-                </div>
               </div>
             )}
           </motion.div>

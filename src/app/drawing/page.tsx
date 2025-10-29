@@ -28,16 +28,16 @@ export default function DrawingPage() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Set canvas size
+    // Set canvas size (only once)
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
 
-    // Set initial styles
+    // Set initial styles (only once)
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.strokeStyle = selectedColor;
     ctx.lineWidth = brushSize;
-  }, [selectedColor, brushSize]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getEventPos = (
     e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
@@ -68,6 +68,15 @@ export default function DrawingPage() {
     setIsDrawing(true);
 
     const { x, y } = getEventPos(e);
+
+    // Set current drawing properties
+    if (isErasing) {
+      ctx.globalCompositeOperation = "destination-out";
+    } else {
+      ctx.globalCompositeOperation = "source-over";
+      ctx.strokeStyle = selectedColor;
+    }
+    ctx.lineWidth = brushSize;
 
     ctx.beginPath();
     ctx.moveTo(x, y);

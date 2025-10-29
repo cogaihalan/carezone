@@ -25,7 +25,7 @@ export default function GameScreen({
 }) {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(1);
+  const [timeRemaining, setTimeRemaining] = useState(30);
   const containerRef = useRef<HTMLDivElement>(null);
   const { playSound } = useSound();
 
@@ -86,8 +86,6 @@ export default function GameScreen({
       const containerWidth = containerRef.current.offsetWidth;
 
       setBubbles((prevBubbles) => {
-        let missedBubbles: number = 0;
-
         const updatedBubbles = prevBubbles
           .map((bubble: Bubble) => {
             const newX = bubble.x + bubble.speedX;
@@ -98,12 +96,6 @@ export default function GameScreen({
             // Bounce off walls
             if (newX <= 0 || newX >= containerWidth - bubble.size) {
               newSpeedX = -newSpeedX;
-            }
-
-            // If bubble goes off top, count as missed
-            if (newY < -bubble.size) {
-              missedBubbles++;
-              return null;
             }
 
             // Slight randomness
@@ -123,10 +115,6 @@ export default function GameScreen({
           })
           .filter((b): b is Bubble => b !== null);
 
-        if (missedBubbles > 0) {
-          setLives((prev) => prev - missedBubbles);
-        }
-
         return updatedBubbles;
       });
 
@@ -142,17 +130,29 @@ export default function GameScreen({
   useEffect(() => {
     const interval = setInterval(() => {
       generateBubble();
-    }, 600);
+    }, 800);
 
     return () => clearInterval(interval);
   }, [generateBubble]);
 
-  // Commenting this part cuz this game will never ends. Will Uncomment this part after adding the difficulty logic
+  // Timer countdown logic
   useEffect(() => {
-    if (lives <= 0) {
-      onGameOver(score);
-    }
-  }, [lives, score, onGameOver]);
+    const timer = setInterval(() => {
+      setTimeRemaining((prevTime) => {
+        if (prevTime <= 1) {
+          // Use a callback to get the current score when timer ends
+          setScore((currentScore) => {
+            onGameOver(currentScore);
+            return currentScore;
+          });
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [onGameOver]);
 
   return (
     <div
@@ -170,20 +170,33 @@ export default function GameScreen({
         </motion.button>
       </div>
 
-      <div className="absolute top-4 right-4 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md flex items-center space-x-4">
-        <span className="font-semibold text-purple-700">Score: {score}</span>
-        <div className="flex items-center">
-          <span className="font-semibold text-red-500">Lives: </span>
-          <div className="flex ml-2">
-            {lives > 0 &&
-              [...Array(lives)].map((_, i) => (
-                <div
-                  key={i}
-                  className="w-3 h-3 rounded-full bg-red-500 mx-0.5"
-                ></div>
-              ))}
+      {/* Timer and Score Display */}
+      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+        <motion.div
+          className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="text-center">
+            <div className="text-sm text-gray-600">Time</div>
+            <div className={`text-2xl font-bold ${timeRemaining <= 10 ? 'text-red-500' : 'text-purple-700'}`}>
+              {timeRemaining}
+            </div>
           </div>
-        </div>
+        </motion.div>
+        
+        <motion.div
+          className="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-md"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="text-center">
+            <div className="text-sm text-gray-600">Score</div>
+            <div className="text-2xl font-bold text-green-600">{score}</div>
+          </div>
+        </motion.div>
       </div>
 
       <AnimatePresence>
