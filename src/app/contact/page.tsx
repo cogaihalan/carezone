@@ -78,7 +78,7 @@ export default function ContactPage() {
           >
             <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-primary-blue/20">
               <h3 className="font-heading font-semibold text-2xl text-foreground mb-6">
-                Thông tin liên hệ nhóm 4
+                Thông tin liên hệ
               </h3>
 
               <div className="space-y-6">
